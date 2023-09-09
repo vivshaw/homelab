@@ -2,6 +2,17 @@
 
 - All machines images are based on Ubuntu Server Jammy
 
+## Running
+
+You'll need to first spin up a Proxmox cluster, then provide its auth credentials in `credentials.pkrvars.hcl`. Then, to create the images:
+
+```sh
+cd ubuntu-jammy-nomad
+packer build -var-file ../credentials.pkrvars.hcl .
+```
+
+If you've already run this, and wish to re-create the templates after some changes, you currently need to manually remove the templates from Proxmox before rerunning.
+
 ## Miscellany
 
 See [`NOTES.md`](./NOTES.md) for miscellaneous notes and learnings I ran across along the way.
