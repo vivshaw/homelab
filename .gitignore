@@ -11,3 +11,15 @@ credentials.pkrvars.hcl
 
 # For built boxes
 *.box
+
+## Terraform
+
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Exclude private credentials!
+credentials.tfvars
