@@ -24,8 +24,6 @@ source "proxmox-iso" "ubuntu-jammy-nomad" {
   insecure_skip_tls_verify = true
 
   # General settings
-  node                 = "casper"
-  vm_id                = "9000"
   vm_name              = "ubuntu-jammy-nomad"
   template_description = "Ubuntu Server Jammy w/ Nomad template"
 
@@ -75,12 +73,15 @@ source "proxmox-iso" "ubuntu-jammy-nomad" {
   # Autoinstall settings
   http_directory    = "http"
   http_bind_address = "0.0.0.0"
+  # Awful hack! We need each of our builds to have a unique port else the build messes up,
+  # 'cept we don't _actually_ want that- we want 'em all to pull the same config from port 8100.
+  # So we let the 3 builds bind to 3 ports, and two of 'em are then unused.
   http_port_min     = 8100
-  http_port_max     = 8100
+  http_port_max     = 8103
 
   # SSH settings
-  ssh_username = "foobar"
-  ssh_password = "ubuntu"
+  ssh_username = var.ssh_username
+  ssh_password = var.ssh_password
   ssh_timeout  = "20m"
   # TODO: Swap to SSH key authentication
   # ssh_private_key_file = "~/.ssh/id_rsa"
@@ -88,7 +89,15 @@ source "proxmox-iso" "ubuntu-jammy-nomad" {
 
 build {
   name    = "ubuntu-jammy-nomad"
-  sources = ["source.proxmox-iso.ubuntu-jammy-nomad"]
+  
+  dynamic "source" {
+    for_each = var.all_nodes
+    labels   = ["source.proxmox-iso.ubuntu-jammy-nomad"]
+    content {
+      node = source.key
+      vm_id   = "${9000 + source.value.index}"
+    }
+  }
 
   # Provisioning the VM Template for Cloud-Init Integration in Proxmox #1
   provisioner "shell" {

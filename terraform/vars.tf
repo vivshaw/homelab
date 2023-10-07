@@ -13,3 +13,9 @@ variable "pm_password" {
   description = "The password to use when authenticating with the Proxmox API"
   sensitive   = true
 }
+
+variable "nodes" {
+  type        = list(string)
+  description = "Names of the nodes in the Proxmox cluster"
+  default     = ["casper", "balthasar", "melchior"]
+}

@@ -19,12 +19,12 @@ provider "proxmox" {
 }
 
 resource "proxmox_vm_qemu" "ubuntu-nomad-vm" {
-  count = 3
+  count = 9
   name  = "nomad-vm-${count.index + 1}"
   desc  = "Ubuntu Server Jammy w/ Nomad"
 
   # What'll we clone, and where to?
-  target_node = "casper"
+  target_node = var.nodes[count.index % length(var.nodes)]
   clone       = "ubuntu-jammy-nomad"
 
   # Provisioning settings
@@ -53,7 +53,7 @@ resource "proxmox_vm_qemu" "ubuntu-nomad-vm" {
     bridge = "vmbr0"
   }
   # Make sure the VMs get a static IP with a reasonable pattern
-  ipconfig0 = "ip=192.168.1.${130 + 1}/24,gw=10.98.1.1"
+  ipconfig0 = "ip=192.168.1.${130 + count.index + 1}/24,gw=10.98.1.1"
 
   # SSH settings
   # TODO: Swap from password auth to SSH!
