@@ -53,7 +53,7 @@ resource "proxmox_vm_qemu" "ubuntu-nomad-vm" {
     bridge = "vmbr0"
   }
   # Make sure the VMs get a static IP with a reasonable pattern
-  ipconfig0 = "ip=192.168.1.${130 + count.index + 1}/24,gw=10.98.1.1"
+  ipconfig0 = "ip=192.168.1.${130 + count.index}/24,gw=10.98.1.1"
 
   # SSH settings
   # TODO: Swap from password auth to SSH!
