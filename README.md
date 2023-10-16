@@ -1,6 +1,6 @@
 # homelab
 
-@vivshaw's private homelab. Currently, it consists of a fleet of VMs provisioned on a 3-machine Proxmox cluster using Packer and Terraform.
+@vivshaw's homelab. Currently, it consists of a fleet of VMs provisioned on a 3-machine Proxmox cluster using Packer and Terraform.
 
 ## Roadmap
 
@@ -8,7 +8,6 @@
 - [ ] Overall: Get TLS working
 - [ ] Overall: Tighten up token perms
 - [ ] Overall: Use Vault or something to provide secrets
-- [ ] Packer: Get SSH auth set up, then disable password auth
 - [ ] Packer: Provide convenience tools- exa, bat, byobu?
 - [ ] Packer: Provide a script to autoremove existing images
 - [ ] Proxmox: Configure metal? Provide same suite of convenience tools as VMs on the cluster machines, if possible
