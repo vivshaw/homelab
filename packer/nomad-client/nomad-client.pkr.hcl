@@ -14,7 +14,6 @@ packer {
 
 source "proxmox-iso" "nomad-client" {
   # API & auth settings
-  # TODO - use token auth on a dedicated API user
   proxmox_url = "${var.proxmox_api_url}"
   username    = var.proxmox_api_user
   token    = var.proxmox_api_token
