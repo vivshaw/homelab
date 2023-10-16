@@ -10,22 +10,22 @@ terraform {
 provider "proxmox" {
   # Authentication
   # TODO: Swap to token auth!
-  pm_api_url  = var.pm_api_url
-  pm_user     = var.pm_user
-  pm_password = var.pm_password
+  pm_api_url          = var.pm_api_url
+  pm_api_token_id     = var.pm_api_token_id
+  pm_api_token_secret = var.pm_api_token_secret
 
   # TODO: get this working with TLS!
   pm_tls_insecure = true
 }
 
-resource "proxmox_vm_qemu" "ubuntu-nomad-vm" {
+resource "proxmox_vm_qemu" "nomad-client-vm" {
   count = 9
-  name  = "nomad-vm-${count.index + 1}"
-  desc  = "Ubuntu Server Jammy w/ Nomad"
+  name  = "nomad-client-vm-${count.index + 1}"
+  desc  = "Ubuntu Nomad Client VM"
 
   # What'll we clone, and where to?
   target_node = var.nodes[count.index % length(var.nodes)]
-  clone       = "ubuntu-jammy-nomad"
+  clone       = "nomad-client"
 
   # Provisioning settings
   os_type = "cloud-init"

@@ -4,14 +4,14 @@ Packer is used to create VM images that will be deployed onto the Proxmox cluste
 
 All machine images are based on Ubuntu Server Jammy. `cloud-init` is used to configure the machines. Current machine images include:
 
-- **ubuntu-jammy-nomad**, a generic Ubuntu machine
+- **nomad-client**, a Nomad client
 
 ## Running
 
 You'll need to first spin up a Proxmox cluster, then provide its auth credentials in `credentials.pkrvars.hcl`. Then, to create the images:
 
 ```sh
-cd ubuntu-jammy-nomad
+cd nomad-client
 packer build -var-file ../credentials.pkrvars.hcl .
 ```
 

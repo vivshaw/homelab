@@ -12,20 +12,20 @@ packer {
   }
 }
 
-source "proxmox-iso" "ubuntu-jammy-nomad" {
+source "proxmox-iso" "nomad-client" {
   # API & auth settings
   # TODO - use token auth on a dedicated API user
   proxmox_url = "${var.proxmox_api_url}"
   username    = var.proxmox_api_user
-  password    = var.proxmox_api_password
+  token    = var.proxmox_api_token
 
   # Skip TLS verification
   # TODO - get this working with TLS!
   insecure_skip_tls_verify = true
 
   # General settings
-  vm_name              = "ubuntu-jammy-nomad"
-  template_description = "Ubuntu Server Jammy w/ Nomad template"
+  vm_name              = "nomad-client"
+  template_description = "Nomad client running on Ubuntu"
 
   # ISO settings
   iso_url          = "https://releases.ubuntu.com/jammy/ubuntu-22.04.3-live-server-amd64.iso"
@@ -88,11 +88,11 @@ source "proxmox-iso" "ubuntu-jammy-nomad" {
 }
 
 build {
-  name    = "ubuntu-jammy-nomad"
+  name    = "nomad-client"
   
   dynamic "source" {
     for_each = var.all_nodes
-    labels   = ["source.proxmox-iso.ubuntu-jammy-nomad"]
+    labels   = ["source.proxmox-iso.nomad-client"]
     content {
       node = source.key
       vm_id   = "${9000 + source.value.index}"

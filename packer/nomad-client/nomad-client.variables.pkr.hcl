@@ -8,9 +8,9 @@ variable "proxmox_api_user" {
   description = "The username to use when authenticating with the Proxmox API"
 }
 
-variable "proxmox_api_password" {
-  type        = string
-  description = "The password to use when authenticating with the Proxmox API"
+variable "proxmox_api_token" {
+  type = string
+  description = "The token to use when authenticating with the Proxmox API"
   sensitive   = true
 }
 
