@@ -1,28 +1,18 @@
 variable "proxmox_api_url" {
   type        = string
   description = "The URL of the Proxmox API, including the port & protocol"
+  sensitive = true
 }
 
 variable "proxmox_api_user" {
   type        = string
   description = "The username to use when authenticating with the Proxmox API"
+  sensitive = true
 }
 
 variable "proxmox_api_token" {
   type = string
   description = "The token to use when authenticating with the Proxmox API"
-  sensitive   = true
-}
-
-variable "ssh_username" {
-  type = string
-  description = "The username to use for SSHing into the VMs"
-  sensitive   = true
-}
-
-variable "ssh_password" {
-  type = string
-  description = "The password to use for SSHing into the VMs"
   sensitive   = true
 }
 

@@ -6,8 +6,8 @@
 
 - [ ] Overall: Set up script to check deps & run tools automagically
 - [ ] Overall: Get TLS working
-- [ ] Overall: Modularize more, less Ctrl+C Ctrl+V
 - [ ] Overall: Tighten up token perms
+- [ ] Overall: Use Vault or something to provide secrets
 - [ ] Packer: Get SSH auth set up, then disable password auth
 - [ ] Packer: Provide convenience tools- exa, bat, byobu?
 - [ ] Packer: Provide a script to autoremove existing images

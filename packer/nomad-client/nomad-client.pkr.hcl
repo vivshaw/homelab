@@ -80,11 +80,9 @@ source "proxmox-iso" "nomad-client" {
   http_port_max     = 8103
 
   # SSH settings
-  ssh_username = var.ssh_username
-  ssh_password = var.ssh_password
+  ssh_username = "magi"
+  ssh_private_key_file = "~/.ssh/id_magi_system"
   ssh_timeout  = "20m"
-  # TODO: Swap to SSH key authentication
-  # ssh_private_key_file = "~/.ssh/id_rsa"
 }
 
 build {
