@@ -1,0 +1,40 @@
+- name: Wait for cloud-init completion
+  ansible.builtin.shell: |
+    while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 1; done
+
+- name: Clean up SSH hosts
+  ansible.builtin.shell: |
+    rm -f /etc/ssh/ssh_host_*
+
+- name: Remove machine-id
+  ansible.builtin.shell: |
+    truncate --size 0 /etc/machine-id
+
+- name: Clean up apt packages- autoremove
+  ansible.builtin.apt:
+    autoremove: yes
+    purge: yes
+
+- name: Clean up apt packages- autoclean
+  ansible.builtin.apt:
+    autoclean: yes
+
+# TODO: Why isn't apt module's clean supported?
+- name: Clean up apt packages- clean
+  ansible.builtin.shell: |
+    apt-get clean
+
+- name: Clean up cloud-init
+  ansible.builtin.shell: |
+    cloud-init clean
+    rm -f /etc/cloud/cloud.cfg.d/subiquity-disable-cloudinit-networking.cfg
+    rm -f /etc/netplan/00-installer-config.yaml
+
+- name: Flush to disk
+  ansible.builtin.shell: |
+    sync
+
+- name: Copy cloud-init config
+  ansible.builtin.copy:
+    dest: "/etc/cloud/cloud.cfg.d/99-pve.cfg"
+    src: "../../packer/nomad-client/files/99-pve.cfg"
