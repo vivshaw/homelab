@@ -2,6 +2,17 @@
 
 @vivshaw's homelab. Currently, it consists of a fleet of VMs provisioned on a 3-machine Proxmox cluster using Packer and Terraform.
 
+## Getting started
+
+You'll need to provision a Proxmox API token, then provide these enviroment variables in order for most of the tools and scripts to work:
+
+```sh
+export PROXMOX_URL="https://example.com:8006/api2/json"
+export PROXMOX_USER_AND_REALM="example@realm"
+export PROXMOX_TOKEN_ID="example-token-id"
+export PROXMOX_TOKEN="some-example-uuid"
+```
+
 ## Roadmap
 
 - [ ] Overall: Set up script to check deps & run tools automagically
