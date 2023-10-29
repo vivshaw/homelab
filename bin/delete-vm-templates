@@ -1,0 +1,22 @@
+#!/bin/bash
+
+## Script to delete all Proxmox VM templates from the cluster.
+## Currently, there is one template per node, with known IDs. That makes this easy!
+
+content_header="Content-Type: application/json"
+auth_header='Authorization: PVEAPIToken=$PROXMOX_USER_AND_REALM!$PROXMOX_TOKEN_ID=$PROXMOX_TOKEN'
+
+## Janky fake associative array mapping nodes to their template VM IDs
+vm_templates_by_node=('casper:9000' 'balthasar:9001' 'melchior:9002')
+
+for template_and_node in ${vm_templates_by_node[@]}
+do
+  tmpArray=(${template_and_node//:/ })
+  node=${tmpArray[0]}
+  vmid=${tmpArray[1]}
+  echo "Deleting VM $vmid on node $node"
+
+  curl -k -H "$content_header" -H "$auth_header" -X DELETE "$PROXMOX_URL/nodes/$node/qemu/$vmid"
+done
+
+echo "Done deleting VM templates!"
