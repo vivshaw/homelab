@@ -1,0 +1,25 @@
+- name: Install prereqs
+  ansible.builtin.apt:
+    update_cache: yes
+    pkg:
+      - wget
+      - gpg
+      - coreutils
+
+- name: Add Hashicorp apt repo
+  block:
+    - name: Hashicorp > Fetch GPG Key
+      ansible.builtin.shell: |
+        wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+    - name: Hashicorp > Add apt repo
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+        state: present
+
+- name: Install Hashicorp tools
+  ansible.builtin.apt:
+    update_cache: yes
+    pkg:
+      - nomad
+      - consul
+      - vault

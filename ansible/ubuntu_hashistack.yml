@@ -6,3 +6,4 @@
 
   tasks:
     - include_tasks: tasks/cleanup.yml
+    - include_tasks: tasks/hashistack.yml
