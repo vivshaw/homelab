@@ -37,4 +37,4 @@
 - name: Copy cloud-init config
   ansible.builtin.copy:
     dest: "/etc/cloud/cloud.cfg.d/99-pve.cfg"
-    src: "../../packer/nomad-client/files/99-pve.cfg"
+    src: "../../packer/ubuntu-hashistack/files/99-pve.cfg"

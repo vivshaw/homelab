@@ -17,14 +17,14 @@ provider "proxmox" {
   pm_tls_insecure = true
 }
 
-resource "proxmox_vm_qemu" "nomad-client-vm" {
+resource "proxmox_vm_qemu" "nomad-client" {
   count = 9
-  name  = "nomad-client-vm-${count.index + 1}"
+  name  = "nomad-client-${count.index + 1}"
   desc  = "Ubuntu Nomad Client VM"
 
   # What'll we clone, and where to?
   target_node = var.nodes[count.index % length(var.nodes)]
-  clone       = "nomad-client"
+  clone       = "ubuntu-hashistack"
 
   # Provisioning settings
   os_type = "cloud-init"

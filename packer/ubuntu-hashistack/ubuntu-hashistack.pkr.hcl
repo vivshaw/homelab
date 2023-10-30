@@ -12,7 +12,7 @@ packer {
   }
 }
 
-source "proxmox-iso" "nomad-client" {
+source "proxmox-iso" "ubuntu-hashistack" {
   # API & auth settings
   proxmox_url = "${var.proxmox_api_url}"
   username    = var.proxmox_api_user
@@ -23,8 +23,8 @@ source "proxmox-iso" "nomad-client" {
   insecure_skip_tls_verify = true
 
   # General settings
-  vm_name              = "nomad-client"
-  template_description = "Nomad client running on Ubuntu"
+  vm_name              = "ubuntu-hashistack"
+  template_description = "Ubuntu Server with Hashicorp Stack"
 
   # ISO settings
   iso_url          = "https://releases.ubuntu.com/jammy/ubuntu-22.04.3-live-server-amd64.iso"
@@ -67,7 +67,7 @@ source "proxmox-iso" "nomad-client" {
     "boot<enter>"
   ]
   boot_wait         = "10s"
-  boot_key_interval = "1000ms"
+  boot_key_interval = "800ms"
 
   # Autoinstall settings
   http_directory    = "http"
@@ -85,11 +85,11 @@ source "proxmox-iso" "nomad-client" {
 }
 
 build {
-  name    = "nomad-client"
+  name    = "ubuntu-hashistack"
   
   dynamic "source" {
     for_each = var.all_nodes
-    labels   = ["source.proxmox-iso.nomad-client"]
+    labels   = ["source.proxmox-iso.ubuntu-hashistack"]
     
     content {
       node = source.key
@@ -98,8 +98,7 @@ build {
   }
 
   provisioner "ansible" {
-    playbook_file    = "../../ansible/ubuntu_hashistack.yml"
+    playbook_file    =  "../../ansible/ubuntu_hashistack.yml"
     use_proxy        = true
-    extra_arguments = [ "-vvvv" ]
   }
 }
