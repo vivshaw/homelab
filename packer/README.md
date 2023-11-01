@@ -2,9 +2,9 @@
 
 Packer is used to create VM images that will be deployed onto the Proxmox cluster. Rather than deploy them directly, we use Packer to crete the VM templates, then we provision those VMs [with Terraform](../terraform/README.md).
 
-All machine images are based on Ubuntu Server Jammy. `cloud-init` is used to configure the machines. Current machine images include:
+All machine images are based on Ubuntu Server Jammy. [cloud-init](https://cloud-init.io/) and [Ansible](https://www.ansible.com/) are used to configure the images- see [the cloud-init user-data here](./ubuntu-hashistack/http/user-data) and [the Ansible config here](../ansible/README.md). Current machine images include:
 
-- **ubuntu-hashistack**, an Ubuntu Server Jammy box with the Hsahicorp stack (Nomad, Consul, and Vault)
+- **ubuntu-hashistack**, an Ubuntu Server Jammy box with the Hashicorp stack (Nomad, Consul, and Vault)
 
 ## Running
 
