@@ -56,5 +56,119 @@ resource "proxmox_vm_qemu" "nomad-client" {
     bridge = "vmbr0"
   }
   # Make sure the VMs get a static IP with a reasonable pattern
-  ipconfig0 = "ip=192.168.1.${130 + count.index}/24,gw=10.98.1.1"
+  ipconfig0 = "ip=192.168.1.${130 + count.index}/24,gw=192.168.1.1"
+}
+
+resource "proxmox_vm_qemu" "nomad-leader" {
+  name = "nomad-leader"
+  desc = "Ubuntu Nomad Cluster Leader"
+
+  # What'll we clone, and where to?
+  target_node = "casper"
+  clone       = "ubuntu-hashistack"
+  full_clone  = false
+
+  # Provisioning settings
+  os_type = "cloud-init"
+
+  # QEMU settings
+  agent = 1
+
+  # VM resource settings
+  cores    = 4
+  sockets  = 1
+  cpu      = "host"
+  memory   = 4096
+  scsihw   = "virtio-scsi-pci"
+  bootdisk = "scsi0"
+  disk {
+    slot    = 0
+    size    = "32G"
+    type    = "virtio"
+    storage = "local-lvm"
+  }
+
+  # Network settings
+  network {
+    model  = "virtio"
+    bridge = "vmbr0"
+  }
+  # Make sure the VMs get a static IP with a reasonable pattern
+  ipconfig0 = "ip=192.168.1.140/24,gw=192.168.1.1"
+}
+
+resource "proxmox_vm_qemu" "vault-server" {
+  name = "vault-server"
+  desc = "Ubuntu Vault Server"
+
+  # What'll we clone, and where to?
+  target_node = "balthasar"
+  clone       = "ubuntu-hashistack"
+  full_clone  = false
+
+  # Provisioning settings
+  os_type = "cloud-init"
+
+  # QEMU settings
+  agent = 1
+
+  # VM resource settings
+  cores    = 4
+  sockets  = 1
+  cpu      = "host"
+  memory   = 4096
+  scsihw   = "virtio-scsi-pci"
+  bootdisk = "scsi0"
+  disk {
+    slot    = 0
+    size    = "32G"
+    type    = "virtio"
+    storage = "local-lvm"
+  }
+
+  # Network settings
+  network {
+    model  = "virtio"
+    bridge = "vmbr0"
+  }
+  # Make sure the VMs get a static IP with a reasonable pattern
+  ipconfig0 = "ip=192.168.1.141/24,gw=192.168.1.1"
+}
+
+resource "proxmox_vm_qemu" "consul-server" {
+  name = "consul-server"
+  desc = "Ubuntu Consul Server"
+
+  # What'll we clone, and where to?
+  target_node = "melchior"
+  clone       = "ubuntu-hashistack"
+  full_clone  = false
+
+  # Provisioning settings
+  os_type = "cloud-init"
+
+  # QEMU settings
+  agent = 1
+
+  # VM resource settings
+  cores    = 4
+  sockets  = 1
+  cpu      = "host"
+  memory   = 4096
+  scsihw   = "virtio-scsi-pci"
+  bootdisk = "scsi0"
+  disk {
+    slot    = 0
+    size    = "32G"
+    type    = "virtio"
+    storage = "local-lvm"
+  }
+
+  # Network settings
+  network {
+    model  = "virtio"
+    bridge = "vmbr0"
+  }
+  # Make sure the VMs get a static IP with a reasonable pattern
+  ipconfig0 = "ip=192.168.1.142/24,gw=192.168.1.1"
 }
