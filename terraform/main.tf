@@ -13,6 +13,9 @@ provider "proxmox" {
   pm_api_token_id     = var.pm_api_token_id
   pm_api_token_secret = var.pm_api_token_secret
 
+  # Don't run in parallel, to stop race conditions with VM ids
+  pm_parallel = 1
+
   # TODO: get this working with TLS!
   pm_tls_insecure = true
 }
@@ -25,6 +28,7 @@ resource "proxmox_vm_qemu" "nomad-client" {
   # What'll we clone, and where to?
   target_node = var.nodes[count.index % length(var.nodes)]
   clone       = "ubuntu-hashistack"
+  full_clone  = false
 
   # Provisioning settings
   os_type = "cloud-init"
