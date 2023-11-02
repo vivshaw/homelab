@@ -35,6 +35,7 @@ export PROXMOX_TOKEN="some-example-uuid"
 - [ ] Overall: Get TLS working
 - [ ] Overall: Tighten up token perms
 - [ ] Overall: Use Vault or something to provide secrets
+- [ ] Overall: Single source of truth for physical machine info- hostnames, canonical order, VM template ID, etc.
 - [ ] Terraform: Actually configure the Vault & Consul machines, and do the Nomad cluster config
 - [ ] Ansible: Find a nicer way to organize the Ansible stuff, once there's more of it
 - [ ] Ansible: Pull more, _ideally_ all, of the base VM image configuration into `cloud-init`. That way, the base image can be immutable, and Ansible can be used only for provision-time config.
