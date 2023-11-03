@@ -4,7 +4,7 @@
 ## Currently, there is one template per node, with known IDs. That makes this easy!
 
 content_header="Content-Type: application/json"
-auth_header="Authorization: PVEAPIToken=$PROXMOX_USER_AND_REALM"'!'"$PROXMOX_TOKEN_ID=$PROXMOX_TOKEN"
+auth_header="Authorization: PVEAPIToken=$PROXMOX_USER_REALM_AND_TOKEN_ID=$PROXMOX_TOKEN"
 
 ## Janky fake associative array mapping nodes to their template VM IDs
 vm_templates_by_node=('casper:9000' 'balthasar:9001' 'melchior:9002')
