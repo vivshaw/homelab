@@ -60,7 +60,7 @@ resource "proxmox_vm_qemu" "nomad-client" {
     model  = "virtio"
     bridge = "vmbr0"
   }
-  # Make sure the VMs get a static IP with a reasonable pattern
+  # Make sure the VMs get a set of static IPs in a block from .130 to .138
   ipconfig0 = "ip=192.168.1.${130 + count.index}/24,gw=192.168.1.1"
 
   provisioner "remote-exec" {
@@ -111,7 +111,6 @@ resource "proxmox_vm_qemu" "nomad-leader" {
     model  = "virtio"
     bridge = "vmbr0"
   }
-  # Make sure the VMs get a static IP with a reasonable pattern
   ipconfig0 = "ip=192.168.1.140/24,gw=192.168.1.1"
 
   provisioner "remote-exec" {
@@ -162,7 +161,6 @@ resource "proxmox_vm_qemu" "vault-server" {
     model  = "virtio"
     bridge = "vmbr0"
   }
-  # Make sure the VMs get a static IP with a reasonable pattern
   ipconfig0 = "ip=192.168.1.141/24,gw=192.168.1.1"
 
   provisioner "remote-exec" {
@@ -213,7 +211,6 @@ resource "proxmox_vm_qemu" "consul-server" {
     model  = "virtio"
     bridge = "vmbr0"
   }
-  # Make sure the VMs get a static IP with a reasonable pattern
   ipconfig0 = "ip=192.168.1.142/24,gw=192.168.1.1"
 
   provisioner "remote-exec" {
