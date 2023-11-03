@@ -14,9 +14,9 @@ packer {
 
 source "proxmox-iso" "ubuntu-hashistack" {
   # API & auth settings
-  proxmox_url = "${var.proxmox_api_url}"
-  username    = var.proxmox_api_user
-  token    = var.proxmox_api_token
+  proxmox_url = var.proxmox_api_url
+  username    = var.proxmox_api_token_id
+  token    = var.proxmox_api_token_secret
 
   # Skip TLS verification
   # TODO - get this working with TLS!
@@ -85,7 +85,7 @@ source "proxmox-iso" "ubuntu-hashistack" {
 }
 
 build {
-  name    = "ubuntu-hashistack"
+  name = "ubuntu-hashistack"
   
   dynamic "source" {
     for_each = var.all_nodes

@@ -4,7 +4,7 @@
 ## Currently, there is one template per node, with known IDs. That makes this easy!
 
 content_header="Content-Type: application/json"
-auth_header="Authorization: PVEAPIToken=$PROXMOX_USER_REALM_AND_TOKEN_ID=$PROXMOX_TOKEN"
+auth_header="Authorization: PVEAPIToken=$TF_VAR_proxmox_api_token_id=$TF_VAR_proxmox_api_token_secret"
 
 ## Janky fake associative array mapping nodes to their template VM IDs
 vm_templates_by_node=('casper:9000' 'balthasar:9001' 'melchior:9002')
@@ -16,7 +16,7 @@ do
   vmid=${tmpArray[1]}
   echo "Deleting VM $vmid on node $node"
 
-  curl -k -H "$content_header" -H "$auth_header" -X DELETE "$PROXMOX_URL/nodes/$node/qemu/$vmid"
+  curl -k -H "$content_header" -H "$auth_header" -X DELETE "$TF_VAR_proxmox_api_url/nodes/$node/qemu/$vmid"
   echo ""
 done
 

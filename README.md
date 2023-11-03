@@ -23,10 +23,9 @@ The switch is a [Netgear GS308E](https://www.netgear.com/business/wired/switches
 You'll need to provision a Proxmox API token, then provide these enviroment variables in order for most of the tools and scripts to work:
 
 ```sh
-export PROXMOX_URL="https://example.com:8006/api2/json"
-export PROXMOX_USER_AND_REALM="example@realm"
-export PROXMOX_TOKEN_ID="example-token-id"
-export PROXMOX_TOKEN="some-example-uuid"
+export TF_VAR_proxmox_api_url="https://example.com:8006/api2/json"
+export TF_VAR_proxmox_api_token_id="example@realm!token-id"
+export TF_VAR_proxmox_api_token_secret="some-example-uuid"
 ```
 
 ## Roadmap

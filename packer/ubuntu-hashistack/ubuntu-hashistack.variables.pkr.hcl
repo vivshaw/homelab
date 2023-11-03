@@ -1,21 +1,21 @@
 variable "proxmox_api_url" {
   type        = string
   description = "The URL of the Proxmox API, including the port & protocol"
-  default = env("PROXMOX_URL")
+  default = env("TF_VAR_proxmox_api_url")
   sensitive = true
 }
 
-variable "proxmox_api_user" {
+variable "proxmox_api_token_id" {
   type        = string
-  description = "The username (*with* realm and token ID!) to use when authenticating with the Proxmox API"
-  default = env("PROXMOX_USER_REALM_AND_TOKEN_ID")
+  description = "The token ID (username with realm and token) to use when authenticating with the Proxmox API"
+  default = env("TF_VAR_proxmox_api_token_id")
   sensitive = true
 }
 
-variable "proxmox_api_token" {
+variable "proxmox_api_token_secret" {
   type = string
-  description = "The token to use when authenticating with the Proxmox API"
-  default = env("PROXMOX_TOKEN")
+  description = "The token secret to use when authenticating with the Proxmox API"
+  default = env("TF_VAR_proxmox_api_token_secret")
   sensitive   = true
 }
 

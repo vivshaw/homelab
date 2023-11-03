@@ -14,9 +14,9 @@ terraform {
 
 provider "proxmox" {
   # Authentication
-  pm_api_url          = var.pm_api_url
-  pm_api_token_id     = var.pm_api_token_id
-  pm_api_token_secret = var.pm_api_token_secret
+  pm_api_url          = var.proxmox_api_url
+  pm_api_token_id     = var.proxmox_api_token_id
+  pm_api_token_secret = var.proxmox_api_token_secret
 
   # Don't run in parallel, to stop race conditions with VM ids
   pm_parallel = 1
