@@ -13,7 +13,7 @@ You'll need to first spin up a Proxmox cluster, then provide its auth credential
 ```sh
 cd ubuntu-hashistack
 packer init
-packer build
+packer -parallel-builds=1  build .
 ```
 
 If you've already run this, and wish to re-create the templates after some changes, you need to remove the templates from Proxmox before rerunning. You can do that automagically with [delete-vm-templates](../bin/delete-vm-templates).

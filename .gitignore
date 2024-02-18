@@ -24,3 +24,8 @@ credentials.pkrvars.hcl
 # Exclude private credentials!
 credentials.tfvars
 .envrc
+
+## Other
+
+# Base ISO
+ubuntu-22.04.3-live-server-amd64.iso

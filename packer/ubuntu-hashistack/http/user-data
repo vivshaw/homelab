@@ -39,4 +39,4 @@ autoinstall:
         sudo: ALL=(ALL) NOPASSWD:ALL
         shell: /bin/bash
         ssh_authorized_keys:
-          - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEMS205WI1K/BRZoTELgJvbuldKL4MoC4hBIuimWq/bp magi@system
+          - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDCgGXHvjDuQVwX8lNxgaK/QwMTylSHoxodVLl/S3DyL hey@vivsha.ws

@@ -28,6 +28,8 @@ export TF_VAR_proxmox_api_token_id="example@realm!token-id"
 export TF_VAR_proxmox_api_token_secret="some-example-uuid"
 ```
 
+You'll also need Packer, Terraform, and Ansible installed. 
+
 ## Roadmap
 
 - [ ] Overall: Set up script to check deps & run tools automagically
